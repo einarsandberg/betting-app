@@ -56,6 +56,10 @@
         "@typescript-eslint/explicit-function-return-type": ["error"],
         "@typescript-eslint/explicit-member-accessibility": ["error"],
         "@typescript-eslint/explicit-module-boundary-types": ["error"],
+        "@typescript-eslint/no-inferrable-types": ["error"],
+        "@typescript-eslint/prefer-as-const": ["error"],
+        "@typescript-eslint/prefer-for-of": ["error"],
+        "@typescript-eslint/no-require-imports": ["error"],
         "@typescript-eslint/member-delimiter-style": ["error", {
             "multiline": {
               "delimiter": "semi",
