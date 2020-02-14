@@ -1,10 +1,8 @@
 import { Router } from 'express';
-
+import UserRouter from './userRouter';
 // Init router and path
 const router = Router();
+router.use('/users', UserRouter);
 
-router.get('/', function(req, res) {
-    res.send('Hello');
-});
 // Export the base-router
 export default router;
