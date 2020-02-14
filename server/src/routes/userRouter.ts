@@ -7,7 +7,7 @@ router.post('/', async (req, res) => {
     const user = new User({ ...req.body });
     try {
         const createdUser = await user.save();
-        res.send(createdUser);
+        res.send('Successfully created user');
     } catch(err) {
         res.status(500).send('An error occured');
     }
