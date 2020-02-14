@@ -9,10 +9,24 @@ export interface User extends Document {
 }
 
 const UserSchema: Schema = new Schema({
-    email: { type: String, required: true, unique: true },
+    email: { type: String, required: true, unique: true, validate: (input: string): boolean => {
+        const re = /\S+@\S+\.\S+/;
+        return re.test(input.toLowerCase());
+    }},
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    password: { type: String, required: true },
+    password: { type: String, required: true, minLength: 8 },
+});
+
+UserSchema.pre('save', function(this: User, next) {
+    const user = this;
+    // Lowercase email and capitalize first letter of firstName and lastName    
+    if (user.isNew) {
+        user.email = user.email.toLowerCase();
+        user.firstName = user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1).toLowerCase();
+        user.lastName = user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1).toLowerCase();
+    }
+    next();
 });
 
 UserSchema.pre('save', function(this: User, next) {
