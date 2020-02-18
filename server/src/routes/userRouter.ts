@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import passport from 'passport';
 import User from 'src/schemas/User';
+import jwt from 'jsonwebtoken';
 const router = Router();
 // Signup
 router.post('/', async (req, res) => {
@@ -14,9 +14,20 @@ router.post('/', async (req, res) => {
     
 });
 
+router.post('/login', (req, res) => {
+    User.findOne({
+        email: req.body.email,
+    }, function(err: Error, user) {
+        if (err) return res.send('Error');
+        
+        if (!user) return res.send('No user found');
 
-router.post('/login', passport.authenticate('local'), (req, res) => {
-    res.send('Authenticated');
+        user.comparePassword(req.body.password, (err: Error, success: boolean) => {
+            if (!success) return res.send('Wrong')
+
+            return res.send('Success');
+        });
+    });
 });
 
 export default router;
