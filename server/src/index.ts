@@ -1,7 +1,7 @@
-import './loadEnv'; // Must be the first import
+import dotenv from 'dotenv';
+dotenv.config();
 import app from './server';
 import mongoose from 'mongoose';
-
 
 // Start the server
 const port = Number(process.env.PORT || 8000);

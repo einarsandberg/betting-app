@@ -1,11 +1,12 @@
 import mongoose, { Schema, Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 
-export interface User extends Document {
+export interface IUser extends Document {
     email: string;
     firstName: string;
     lastName: string;
     password: string;
+    comparePassword: (password: string, cb: (err: Error, succ: boolean) => void) => void;
 }
 
 const UserSchema: Schema = new Schema({
@@ -23,7 +24,7 @@ const UserSchema: Schema = new Schema({
     password: { type: String, required: true, minLength: 8 },
 });
 
-UserSchema.pre('save', function(this: User, next) {
+UserSchema.pre('save', function(this: IUser, next) {
     const user = this;
     // Lowercase email and capitalize first letter of firstName and lastName    
     if (user.isNew) {
@@ -33,7 +34,7 @@ UserSchema.pre('save', function(this: User, next) {
     next();
 });
 
-UserSchema.pre('save', function(this: User, next) {
+UserSchema.pre('save', function(this: IUser, next) {
     const user = this;
     // Short circuit if password isn't modified.
     if (!user.isModified('password')) return next();
@@ -53,8 +54,8 @@ UserSchema.pre('save', function(this: User, next) {
     });
 });
 
-UserSchema.methods.comparePassword = function(this: User, password: string, cb: () => void): void {
+UserSchema.methods.comparePassword = function(password: string, cb: (err: Error, success: boolean) => void): void {
     bcrypt.compare(password, this.password, cb);
 };
 
-export default mongoose.model<User>('User', UserSchema);
+export default mongoose.model<IUser>('User', UserSchema);
