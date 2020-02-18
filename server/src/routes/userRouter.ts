@@ -14,18 +14,21 @@ router.post('/', async (req, res) => {
     
 });
 
+// TODO: nicer responses
 router.post('/login', (req, res) => {
     User.findOne({
         email: req.body.email,
     }, function(err: Error, user) {
         if (err) return res.send('Error');
         
-        if (!user) return res.send('No user found');
+        if (!user) return res.send('Wrong username/password');
 
         user.comparePassword(req.body.password, (err: Error, success: boolean) => {
-            if (!success) return res.send('Wrong')
-
-            return res.send('Success');
+            if (!success) return res.send('Wrong username/password');
+            
+            // Expire after 15 min
+            const token = jwt.sign({ email: req.body.email }, process.env.JWT_SECRET! , { expiresIn: 900 });
+            return res.json({ token });
         });
     });
 });
