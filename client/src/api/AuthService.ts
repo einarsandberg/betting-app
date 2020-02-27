@@ -1,9 +1,9 @@
 
-type LoginResponse = {
+interface LoginResponse extends AuthStatusResponse {
     token: string;
 }
 
-type AuthStatusResponse = {
+interface AuthStatusResponse {
     authorized: boolean;
     user: User;
 }

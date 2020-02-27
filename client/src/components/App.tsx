@@ -28,10 +28,16 @@ const App: React.FC = () => {
 
     const login =  async (email: string, password: string): Promise<void> => {
         try  {
-            const res = await AuthService.login(email, password); 
+            const res = await AuthService.login(email, password);
+            if (res.authorized) {
+                setCurrentUser(res.user);
+                setIsAuthorized(true);
+            } else {
+                setIsAuthorized(false);
+            }
         }
         catch {
-            //
+            setIsAuthorized(false);
         }
     };
     
