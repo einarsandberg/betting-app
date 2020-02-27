@@ -30,8 +30,8 @@ router.post('/status', withAuth, (req, res) => {
         if (!user)
             return res.send('Unable to find logged in user');
         
-        res.send({ user });
-    });
+        res.send({ user, authorized: true });
+    }).select('-_id');
 });
 
 export default router;

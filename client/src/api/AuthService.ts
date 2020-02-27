@@ -4,6 +4,7 @@ type LoginResponse = {
 }
 
 type AuthStatusResponse = {
+    authorized: boolean;
     user: User;
 }
 export interface User {
