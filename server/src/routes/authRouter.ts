@@ -12,13 +12,21 @@ router.post('/login', (req, res) => {
         if (err)
             return res.send('Error');
         if (!user)
-            return res.send('Wrong username/password');
+            return res.status(401).send({authorized: false, 'message': 'Wrong username/password'});
         user.comparePassword(req.body.password, (err: Error, success: boolean) => {
             if (!success)
-                return res.send('Wrong username/password');
+                return res.status(401).send({authorized: false, 'message': 'Wrong username/password'});
             // Expire after 15 min
             const token = jwt.sign({ email: req.body.email }, process.env.JWT_SECRET!, { expiresIn: 900 });
-            return res.json({ token });
+            return res.json({
+                token,
+                authorized: true,
+                user: {
+                    email: user.email,
+                    firstName: user.firstName,
+                    lastName: user.lastName,
+                },
+            });
         });
     }).select('+password');
 });
