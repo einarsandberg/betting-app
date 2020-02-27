@@ -1,7 +1,17 @@
 
-export type LoginResponse = {
+type LoginResponse = {
     token: string;
 }
+
+type AuthStatusResponse = {
+    user: User;
+}
+export interface User {
+    email: string;
+    firstName: string;
+    password: string;
+}
+
 
 export default class AuthService {
     
@@ -21,7 +31,7 @@ export default class AuthService {
         return data;
     }
 
-    public static auth = async(): Promise<void> => {
+    public static auth = async(): Promise<AuthStatusResponse> => {
         const res = await fetch(
             '/api/auth/status', 
             {
