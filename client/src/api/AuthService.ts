@@ -15,10 +15,11 @@ export interface User {
 
 
 export default class AuthService {
-    
-    public static login = async (email: string, password: string): Promise<LoginResponse> => {
+    private baseUrl = '/api/auth';
+
+    public login = async (email: string, password: string): Promise<LoginResponse> => {
         const res = await fetch(
-            '/api/auth/login', 
+            `${this.baseUrl}/login`, 
             {
                 method: 'POST',
                 body: JSON.stringify({ email, password }),
@@ -32,9 +33,9 @@ export default class AuthService {
         return data;
     }
 
-    public static auth = async(): Promise<AuthStatusResponse> => {
+    public auth = async(): Promise<AuthStatusResponse> => {
         const res = await fetch(
-            '/api/auth/status', 
+            `${this.baseUrl}/status`, 
             {
                 method: 'POST',
                 headers: new Headers({

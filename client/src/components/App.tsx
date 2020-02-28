@@ -5,6 +5,8 @@ import AuthService, { User } from '../api/AuthService';
 import { useEffect } from 'react';
 import Home from './Home';
 
+const authService = new AuthService();
+
 const App: React.FC = () => {
 
     const [isAuthorized, setIsAuthorized] = useState();
@@ -12,7 +14,7 @@ const App: React.FC = () => {
     useEffect(() => {
         async function authUser(): Promise<void> {
             try {
-                const res = await AuthService.auth();
+                const res = await authService.auth();
                 if (res.authorized) {
                     setCurrentUser(res.user);
                     setIsAuthorized(true);
@@ -28,7 +30,7 @@ const App: React.FC = () => {
 
     const login =  async (email: string, password: string): Promise<void> => {
         try  {
-            const res = await AuthService.login(email, password);
+            const res = await authService.login(email, password);
             if (res.authorized) {
                 setCurrentUser(res.user);
                 setIsAuthorized(true);
