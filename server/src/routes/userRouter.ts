@@ -10,8 +10,7 @@ router.post('/', async (req, res) => {
         res.send('Successfully created user');
     } catch(err) {
         res.status(500).send('An error occured');
-    }
-    
+    } 
 });
 
 export default router;

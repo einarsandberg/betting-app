@@ -44,7 +44,7 @@ const App: React.FC = () => {
     return (
         <div className="App">
             { !isAuthorized ? 
-                <Login loginCallback={login} />
+                <Login login={login} />
                 : <Home user={currentUser} />
             }
         </div>

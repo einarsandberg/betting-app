@@ -1,15 +1,21 @@
 import React from 'react';
 import './Login.css';
 import { useState } from 'react';
+import useKey from '../../hooks/useKey';
 
 type LoginProps = {
-    loginCallback: (userName: string, password: string) => void;
+    login: (userName: string, password: string) => void;
 }
 
 const Login: React.FC<LoginProps> = (props: LoginProps) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const enterPressed = useKey('ENTER');
+    
+    if (enterPressed) {
+        props.login(email, password);
+    }
 
     return (
         <div className="Login">
@@ -29,7 +35,7 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
                 ></input>
                 <div 
                     className="Login-form__submit"
-                    onClick={(): void => props.loginCallback(email, password)}
+                    onClick={(): void => props.login(email, password)}
                 >
                     Login
                 </div>
