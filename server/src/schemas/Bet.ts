@@ -1,12 +1,12 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import Match, { IMatch } from './Match';
 
 export interface IBet extends Document {
     email: string;
-    matches: IMatch[];
+    homeGoals: number;
+    awayGoals: number;
 }
 
-const BetSchema: Schema = new Schema({
+export const BetSchema: Schema = new Schema({
     email: { 
         type: String, 
         lowercase: true, 
@@ -16,7 +16,8 @@ const BetSchema: Schema = new Schema({
         unique: true,
         validate: (input: string): boolean => /\S+@\S+\.\S+/.test(input.toLowerCase()),
     },
-    matches: [ Match ],
+    homeGoals: { type: Number, required: false },
+    awayGoals: { type: Number, required: false },
 });
 
 export default mongoose.model<IBet>('Bet', BetSchema);
