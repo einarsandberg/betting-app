@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { User } from '../api/AuthService';
 import { useEffect } from 'react';
-import MatchService, { Match, MatchResult } from '../api/MatchService';
+import MatchService, { Match } from '../api/MatchService';
 import Bet from './Bet/Bet';
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
+    Route
 } from 'react-router-dom';
 import './Home.css';
 const matchService = new MatchService();
@@ -37,8 +37,10 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
                     <Route path="/bet">
                         <Bet matches={matches} />
                     </Route>
+                    <Route path="/">
+                        Welcome { props.user.firstName }
+                    </Route>
                 </Switch>
-                This is the homepage
             </div>
         </Router>
     );

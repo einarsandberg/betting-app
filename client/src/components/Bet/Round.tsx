@@ -1,22 +1,24 @@
 import React from 'react';
-import { Match, MatchResult } from '../../api/MatchService';
-import MatchBet from './Match';
+import { Match } from '../../api/MatchService';
+import BetMatch from './BetMatch';
 import './Round.css';
+import { MatchBet } from '../../api/BetService';
 type RoundProps = {
     matches: Match[];
-    setBet: React.Dispatch<React.SetStateAction<MatchResult[]>>;
+    updateBet: (bet: MatchBet) => void;
 };
 
 const Round: React.FC<RoundProps> = (props: RoundProps) => {
     
     const matches = props.matches.map((match) => {
         return (
-            <MatchBet 
+            <BetMatch 
                 key={match._id}
+                matchId={match._id}
                 homeTeam={match.homeTeam}
                 awayTeam={match.awayTeam}
-                setBet={props.setBet}
-            ></MatchBet>
+                updateBet={props.updateBet}
+            ></BetMatch>
         );
     });
     return (

@@ -6,11 +6,6 @@ export interface Match {
     round: number;
 }
 
-export interface MatchResult extends Match {
-    homeGoals: number;
-    awayGoals: number;
-}
-
 export default class MatchService {
     private baseUrl = '/api/matches';
 

@@ -1,4 +1,4 @@
-.Match {
+.BetMatch {
     width: 50%;
     font-size: 18px;
     padding-bottom: 12px;
@@ -6,7 +6,7 @@
     border-bottom: 1px solid lightgrey;
 }
 
-.Match__teams {
+.BetMatch__teams {
     width: 60%;
     display: inline-block;
     overflow: hidden;
@@ -14,8 +14,8 @@
     text-overflow: ellipsis;
 }
 
-.Match__goals-input  {
+.BetMatch__goals-input  {
     font-size: 16px;
-    width: 16px;
+    width: 32px;
     margin: 0 8px;
 }
