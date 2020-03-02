@@ -1,9 +1,14 @@
 
 export interface Match {
+    _id: string;
     homeTeam: string;
     awayTeam: string;
     round: number;
-    _id: string;
+}
+
+export interface MatchResult extends Match {
+    homeGoals: number;
+    awayGoals: number;
 }
 
 export default class MatchService {

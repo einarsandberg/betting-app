@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { User } from '../api/AuthService';
 import { useEffect } from 'react';
-import MatchService, { Match } from '../api/MatchService';
-import Bet from './Bet';
-
+import MatchService, { Match, MatchResult } from '../api/MatchService';
+import Bet from './Bet/Bet';
+import './Home.css';
 const matchService = new MatchService();
 
 type HomeProps = {
@@ -12,7 +12,8 @@ type HomeProps = {
 
 const Home: React.FC<HomeProps> = (props: HomeProps) => {
     const [matches, setMatches] = useState<Match[]>([]);
-    
+    const [bet, setBet] = useState<MatchResult[]>([]);
+
     useEffect(() => {
         async function getMatches(): Promise<void> {
             try {
@@ -27,7 +28,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
 
     return (
         <div className="Home">
-            <Bet matches={matches} />
+            <Bet matches={matches} setBet={setBet} />
         </div>
     );
 };
