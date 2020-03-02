@@ -23,4 +23,19 @@ export default class BetService {
         const data = await res.json();
         return data;
     }
+
+    public getBet = async (): Promise<MatchBet[]> => {
+        const res = await fetch(
+            `${this.baseUrl}`, 
+            {
+                method: 'GET',
+                headers: new Headers({
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
+                }),
+            }
+        );
+        const data = await res.json();
+        return data;
+    }
 }
