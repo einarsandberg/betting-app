@@ -30,12 +30,18 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         getMatches();
     }, []);
 
+    const rounds = matches.reduce((acc: Match[][], curr: Match) => {
+        acc[curr.round] = acc[curr.round] || [];
+        acc[curr.round].push(curr);
+        return acc;
+    }, []);
+
     return (
         <Router>
             <div className="Home">
                 <Switch>
                     <Route path="/bet">
-                        <Bet matches={matches} />
+                        <Bet rounds={rounds} />
                     </Route>
                     <Route path="/">
                         Welcome { props.user.firstName }
