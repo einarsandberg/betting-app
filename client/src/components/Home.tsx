@@ -3,6 +3,11 @@ import { User } from '../api/AuthService';
 import { useEffect } from 'react';
 import MatchService, { Match, MatchResult } from '../api/MatchService';
 import Bet from './Bet/Bet';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from 'react-router-dom';
 import './Home.css';
 const matchService = new MatchService();
 
@@ -12,7 +17,6 @@ type HomeProps = {
 
 const Home: React.FC<HomeProps> = (props: HomeProps) => {
     const [matches, setMatches] = useState<Match[]>([]);
-    const [bet, setBet] = useState<MatchResult[]>([]);
 
     useEffect(() => {
         async function getMatches(): Promise<void> {
@@ -27,9 +31,16 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
     }, []);
 
     return (
-        <div className="Home">
-            <Bet matches={matches} setBet={setBet} />
-        </div>
+        <Router>
+            <div className="Home">
+                <Switch>
+                    <Route path="/bet">
+                        <Bet matches={matches} />
+                    </Route>
+                </Switch>
+                This is the homepage
+            </div>
+        </Router>
     );
 };
     
