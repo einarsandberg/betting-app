@@ -1,5 +1,4 @@
 import mongoose, { Schema, Document } from 'mongoose';
-import { IBet, BetSchema } from './Bet';
 
 export interface IMatch extends Document {
     homeTeam: string;
@@ -7,7 +6,6 @@ export interface IMatch extends Document {
     round: number;
     homeGoals?: number;
     awayGoals?: number;
-    bet?: IBet[];
 }
 
 const MatchSchema: Schema = new Schema({
@@ -16,8 +14,6 @@ const MatchSchema: Schema = new Schema({
     homeGoals: { type: Number, required: false },
     awayGoals: { type: Number, required: false },
     round: { type: Number, required: true },
-    bet: [ BetSchema ],
-    
 });
 
 export default mongoose.model<IMatch>('Match', MatchSchema);

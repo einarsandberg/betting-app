@@ -1,23 +1,23 @@
 import mongoose, { Schema, Document } from 'mongoose';
 
-export interface IBet extends Document {
-    email: string;
+export interface MatchBet {
     homeGoals: number;
     awayGoals: number;
 }
+export interface IBet extends Document {
+    userId: string;
+    matches: MatchBet[];
+}
 
 export const BetSchema: Schema = new Schema({
-    email: { 
-        type: String, 
-        lowercase: true, 
-        required: true, 
-        trim: true, 
-        index: true,
-        unique: true,
-        validate: (input: string): boolean => /\S+@\S+\.\S+/.test(input.toLowerCase()),
-    },
-    homeGoals: { type: Number, required: false },
-    awayGoals: { type: Number, required: false },
+    userId: { type: Schema.Types.ObjectId, ref: 'User', unique: true },
+    matches: [ 
+        {
+            homeGoals: { type: Number, required: false },
+            awayGoals: { type: Number, required: false },
+            matchId: { type: Schema.Types.ObjectId, ref: 'Match', unique: true},
+        },
+    ],
 });
 
 export default mongoose.model<IBet>('Bet', BetSchema);
