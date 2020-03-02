@@ -7,14 +7,12 @@ import User from 'src/schemas/User';
 const router = Router();
 // Signup
 
-router.post('/', async (req: ApiRequest<MatchBet[]>, res) => {
+router.put('/', async (req: ApiRequest<MatchBet[]>, res) => {
     try {
         const user = await User.findOne({ email: res.locals.email });
         if (!user) return res.status(500).send('User not found');
         
-        const bet = new Bet({ userId: user._id, matches: req.body });
-
-        await bet.save();
+        await Bet.findOneAndUpdate({ userId: user._id }, { matches: req.body }, { upsert: true });
         res.send('success');
     } catch(err) {
         console.error(err);
@@ -30,7 +28,7 @@ router.get('/', async (req, res) => {
         const bet = await Bet.findOne({ userId: user._id });
 
         if (!bet) return res.json([]);
-        
+
         res.json(bet.matches);
 
     } catch(err) {

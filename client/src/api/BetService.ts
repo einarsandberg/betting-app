@@ -13,7 +13,7 @@ export default class BetService {
             `${this.baseUrl}`, 
             {
                 body: JSON.stringify(bet),
-                method: 'POST',
+                method: 'PUT',
                 headers: new Headers({
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
