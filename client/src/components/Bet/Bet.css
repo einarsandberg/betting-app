@@ -2,3 +2,14 @@
     width: 80%;
     margin: 0 auto;
 }
+
+.Bet__submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 0;
+    font-size: 18px;
+    background: #2878c8;
+    color: white;
+    cursor: pointer;
+}
