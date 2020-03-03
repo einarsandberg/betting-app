@@ -38,7 +38,7 @@ const BetMatch: React.FC<BetMatchProps> = (props: BetMatchProps) => {
                 className="BetMatch__goals-input"
                 type="number"
                 name="home"
-                value={props.currentBet?.homeGoals}
+                value={props.currentBet?.homeGoals || ''}
                 onChange={handleInputChange}
             ></input>
             <span>-</span>
@@ -46,7 +46,7 @@ const BetMatch: React.FC<BetMatchProps> = (props: BetMatchProps) => {
                 className="BetMatch__goals-input"
                 type="number"
                 name="away"
-                value={props.currentBet?.awayGoals}
+                value={props.currentBet?.awayGoals || ''}
                 onChange={handleInputChange}
             ></input>
             
