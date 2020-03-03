@@ -1,7 +1,6 @@
 import React from 'react';
 import './Login.css';
 import { useState } from 'react';
-import useKey from '../../hooks/useKey';
 
 type LoginProps = {
     login: (userName: string, password: string) => void;
@@ -11,35 +10,34 @@ const Login: React.FC<LoginProps> = (props: LoginProps) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const enterPressed = useKey('ENTER');
     
-    if (enterPressed) {
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
+        e.preventDefault();
         props.login(email, password);
-    }
+    };
 
     return (
         <div className="Login">
             <div className="Login-background"></div>
-            <div className="Login-form">
+            <form className="Login-form" onSubmit={handleSubmit}>
                 <input 
                     className="Login-form__field" 
                     type="text" 
                     placeholder="Email"
                     onChange={(e): void => setEmail(e.target.value)}
-                ></input>
+                />
                 <input 
                     className="Login-form__field" 
                     type="password" 
                     placeholder="Password"
                     onChange={(e): void => setPassword(e.target.value)}
-                ></input>
-                <div 
+                />
+                <input
+                    type="submit"
+                    value="Login"
                     className="Login-form__submit"
-                    onClick={(): void => props.login(email, password)}
-                >
-                    Login
-                </div>
-            </div>
+                />
+            </form>
         </div>
     );
 };
