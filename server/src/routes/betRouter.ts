@@ -13,7 +13,7 @@ router.put('/', async (req: ApiRequest<MatchBet[]>, res) => {
         if (!user) return res.status(500).send('User not found');
         
         await Bet.findOneAndUpdate({ userId: user._id }, { matches: req.body }, { upsert: true });
-        res.send('success');
+        res.json({ status: 'success' });
     } catch(err) {
         console.error(err);
         res.status(500).send('An error occured');
