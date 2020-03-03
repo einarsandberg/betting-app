@@ -10,7 +10,7 @@ import Match, { IMatch } from '../schemas/Match';
 import fs from 'fs';
 
 // DB
-mongoose.connect('mongodb://localhost/allsvenskan-betting-app-db', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://localhost/betting-app-db', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
 // Bind connection to error event
