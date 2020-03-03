@@ -6,7 +6,8 @@ export interface IUser extends Document {
     firstName: string;
     lastName: string;
     password: string;
-    comparePassword: (password: string, cb: (err: Error, succ: boolean) => void) => void;
+    refreshToken: string;
+    comparePassword: (password: string) => Promise<boolean>;
 }
 
 const UserSchema: Schema = new Schema({
@@ -22,6 +23,7 @@ const UserSchema: Schema = new Schema({
     firstName: { type: String, required: true, trim: true },
     lastName: { type: String, required: true, trim: true},
     password: { type: String, required: true, minLength: 8, select: false },
+    refreshToken: { type: String, required: true },
 });
 
 UserSchema.pre('save', function(this: IUser, next) {
@@ -54,8 +56,8 @@ UserSchema.pre('save', function(this: IUser, next) {
     });
 });
 
-UserSchema.methods.comparePassword = function(password: string, cb: (err: Error, success: boolean) => void): void {
-    bcrypt.compare(password, this.password, cb);
+UserSchema.methods.comparePassword = function(password: string): Promise<boolean> {
+    return bcrypt.compare(password, this.password);
 };
 
 export default mongoose.model<IUser>('User', UserSchema);

@@ -12,7 +12,7 @@ const withAuth = (req: Request, res: Response, next: () => void): void => {
     } else {
         jwt.verify(token, process.env.JWT_SECRET!, (err, decoded) => {
             if (err) {
-                res.status(401).json({authorized: false});
+                res.status(401).json({ authorized: false });
             } else {
                 res.locals.email = (decoded as DecodedData).email;
                 next();

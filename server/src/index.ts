@@ -3,6 +3,8 @@ dotenv.config();
 import app from './server';
 import mongoose from 'mongoose';
 
+// TODO: Make sure env variables exist
+
 // Start the server
 const port = Number(process.env.PORT || 8000);
 app.listen(port, () => {

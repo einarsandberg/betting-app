@@ -1,6 +1,8 @@
+import jwt from 'jsonwebtoken';
 
 interface LoginResponse extends AuthStatusResponse {
     token: string;
+    refreshToken: string;
 }
 
 interface AuthStatusResponse {
@@ -15,6 +17,7 @@ export interface User {
 
 
 export default class AuthService {
+
     private baseUrl = '/api/auth';
 
     public login = async (email: string, password: string): Promise<LoginResponse> => {
@@ -26,10 +29,14 @@ export default class AuthService {
                 headers: new Headers({
                     'Content-Type': 'application/json',
                 }),
+
             }
         );
         const data: LoginResponse = await res.json();
+        const expiryDate = (jwt.decode(data.token) as { email: string; iat: number; exp: number; }).exp * 1000;
         localStorage.setItem('jwt', data.token);
+        localStorage.setItem('jwtExpiryDate', expiryDate.toString());
+        localStorage.setItem('refreshToken', data.refreshToken);
         return data;
     }
 
@@ -44,6 +51,11 @@ export default class AuthService {
                 }),
             }
         );
+        
         return res.json();
+    }
+
+    public refreshToken = async(): Promise<void> => {
+        // const res = await fetch()
     }
 }

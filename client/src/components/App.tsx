@@ -52,5 +52,15 @@ const App: React.FC = () => {
         </div>
     );
 };
-    
+
 export default App;
+
+
+// function initTokenRefresh() {
+//     const jwtExpiryDate = Number(localStorage.getItem('jwtExpiryDate')!);
+//     const currentDate = Date.now();
+//     const diff = Math.abs(jwtExpiryDate - currentDate);
+//     setInterval(() => {
+//         authService.refreshTokens()
+//     }, diff);
+// }
