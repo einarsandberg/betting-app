@@ -34,7 +34,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.post('/status', withAuth, async (req, res) => {
+router.get('/status', withAuth, async (req, res) => {
     try {
         const user = await User.findOne({ email: res.locals.email }).select('-_id');
         if (!user) {

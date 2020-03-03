@@ -44,7 +44,7 @@ export default class AuthService {
         const res = await fetch(
             `${this.baseUrl}/status`, 
             {
-                method: 'POST',
+                method: 'GET',
                 headers: new Headers({
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
