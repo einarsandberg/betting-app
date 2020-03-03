@@ -1,15 +1,15 @@
 import React from 'react';
 import { Match } from '../../api/MatchService';
 import BetMatch from './BetMatch';
-import './Round.css';
+import './BetGroup.css';
 import { MatchBet } from '../../api/BetService';
-type RoundProps = {
+type BetGroupProps = {
     matches: Match[];
     currentBet: MatchBet[];
     updateBet: (bet: MatchBet) => void;
 };
 
-const Round: React.FC<RoundProps> = (props: RoundProps) => {
+const BetGroup: React.FC<BetGroupProps> = (props: BetGroupProps) => {
     
     const matches = props.matches.map((match) => {
         return (
@@ -24,11 +24,11 @@ const Round: React.FC<RoundProps> = (props: RoundProps) => {
         );
     });
     return (
-        <div className="Round">
-            <div className="Round__header">Round { props.matches[0].round } </div>
-            <div  className="Round__matches">{ matches }</div>
+        <div className="BetGroup">
+            <div className="BetGroup__header">Group { props.matches[0].group } </div>
+            <div  className="BetGroup__matches">{ matches }</div>
         </div>
     );
 };
     
-export default Round;
+export default BetGroup;

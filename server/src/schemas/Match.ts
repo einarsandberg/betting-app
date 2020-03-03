@@ -3,7 +3,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 export interface IMatch extends Document {
     homeTeam: string;
     awayTeam: string;
-    round: number;
+    group: string;
     homeGoals?: number;
     awayGoals?: number;
 }
@@ -13,7 +13,7 @@ const MatchSchema: Schema = new Schema({
     awayTeam: { type: String, required: true, trim: true },
     homeGoals: { type: Number, required: false },
     awayGoals: { type: Number, required: false },
-    round: { type: Number, required: true },
+    group: { type: String, required: true, maxlength: 1 },
 });
 
 export default mongoose.model<IMatch>('Match', MatchSchema);

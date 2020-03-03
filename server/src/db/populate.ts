@@ -24,18 +24,11 @@ async function addMatchesToDb(matches: IMatch[]) {
             process.exit(1);
         }
 
-        let round = 1;
-        let matchesToAdd = [];
-        while(matches.length > 0) {
-            // 8 matches per round
-            const roundMatches = matches.splice(0,8);
+        let matchesToAdd: IMatch[] = [];
+        matches.forEach((match: IMatch) => {
+            matchesToAdd.push(new Match({ ...match }));
+        })
             
-            for (const matchDef of roundMatches) {
-                const match = new Match({ ...matchDef, round })
-                matchesToAdd.push(match);
-            }
-            round++;
-       }
        await Match.insertMany(matchesToAdd);
        const res = await Match.find();
        console.log('Successfully added ' + res.length + ' matches');

@@ -18,6 +18,6 @@ To stop: brew services stop mongodb-community@4.2
 # Run client
 `npm start`
 
-
-
+# Populate db with matches
+`npm run populate`
 

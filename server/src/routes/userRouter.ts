@@ -9,6 +9,7 @@ router.post('/', async (req, res) => {
         await user.save();
         res.send('Successfully created user');
     } catch(err) {
+        console.error(err);
         res.status(500).send('An error occured');
     } 
 });

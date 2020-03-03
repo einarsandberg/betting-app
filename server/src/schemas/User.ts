@@ -23,7 +23,7 @@ const UserSchema: Schema = new Schema({
     firstName: { type: String, required: true, trim: true },
     lastName: { type: String, required: true, trim: true},
     password: { type: String, required: true, minLength: 8, select: false },
-    refreshToken: { type: String, required: true },
+    refreshToken: { type: String },
 });
 
 UserSchema.pre('save', function(this: IUser, next) {

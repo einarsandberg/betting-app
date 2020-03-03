@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Match } from '../../api/MatchService';
-import Round from './Round';
+import BetGroup from './BetGroup';
 import './Bet.css';
 import BetService, { MatchBet } from '../../api/BetService';
 import { useEffect } from 'react';
@@ -8,7 +8,9 @@ import { useEffect } from 'react';
 const betService = new BetService();
 
 type BetProps = {
-    rounds: Match[][];
+    groups: {
+        [key: string]: Match[];
+    };
 };
 
 const Bet: React.FC<BetProps> = (props: BetProps) => {
@@ -45,19 +47,19 @@ const Bet: React.FC<BetProps> = (props: BetProps) => {
         
     }, []);
 
-    const roundEls = props.rounds.map((matches, i) => {
+    const groupEls = Object.keys(props.groups).map((groupName: string) => {
         return ( 
-            <Round 
-                key={'round' + i} 
+            <BetGroup 
+                key={'group' + groupName} 
                 currentBet={bet} 
-                matches={matches} 
+                matches={props.groups[groupName]} 
                 updateBet={updateBet}
             /> );
     });
     return (
         <div className="Bet">
-            { roundEls }
-            <div className="Bet__submit" onClick={submitBet}>Submit</div>
+            { groupEls }
+            <div className="Bet__submit" onClick={submitBet}>Save</div>
         </div>
     );
 };

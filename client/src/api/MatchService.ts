@@ -3,7 +3,7 @@ export interface Match {
     _id: string;
     homeTeam: string;
     awayTeam: string;
-    round: number;
+    group: string;
 }
 
 export default class MatchService {

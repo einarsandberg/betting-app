@@ -1,8 +1,8 @@
-.Round {
+.BetGroup {
     width: 100%;
 }
 
-.Round__header {
+.BetGroup__header {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 12px;
@@ -10,7 +10,7 @@
 
 }
 
-.Round__matches {
+.BetGroup__matches {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
