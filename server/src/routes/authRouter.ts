@@ -10,18 +10,16 @@ router.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ email: req.body.email }).select('+password');
         if (!user) {
-            return res.status(401).send({ authorized: false, 'message': 'No user found' });
+            return res.status(401).send({ authorized: false, message: 'No user found' });
         }
         const success = await user.comparePassword(req.body.password);
         if (!success) {
-            return res.status(401).send({authorized: false, 'message': 'Wrong username/password'});
+            return res.status(401).send({authorized: false, message: 'Wrong username/password'});
         }
-        const token = jwt.sign({ email: req.body.email }, process.env.JWT_SECRET!, { expiresIn: 900 });
-        user.refreshToken = uuid();
-        await user.save();
+        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET!, { expiresIn: 900 });
+
         return res.json({
             token,
-            refreshToken: user.refreshToken,
             authorized: true,
             user: {
                 email: user.email,
@@ -30,19 +28,36 @@ router.post('/login', async (req, res) => {
             },
         });
     } catch(err) {
-        res.send('Unknown error');
+        console.error(err);
+        res.status(500).send({ message: 'Unknown error', authorized: false });
     }
 });
 
-router.get('/status', withAuth, async (req, res) => {
+router.get('/status', async (req, res) => {
     try {
-        const user = await User.findOne({ email: res.locals.email }).select('-_id');
-        if (!user) {
-            res.send('Unable to find logged in user');
+        const token = req.headers.authorization?.split(' ')[1];
+        
+        if (!token) {
+            return res.json({ authorized: false });
         }
-        res.send({ user, authorized: true });
+        
+        jwt.verify(token, process.env.JWT_SECRET!, async (err, decoded) => {
+            const decodedData = decoded as { email: string; };
+            if (err) {
+                return res.json({ authorized: false });
+            }
+            
+            if (decodedData) {
+                const user = await User.findOne({ email: decodedData.email  }).select('-_id');
+                if (!user) {
+                    return res.json({ authorized: false });
+                }
+                res.send({ user, authorized: true });
+            }
+        });
     } catch(err) {
-        res.send('Unknown error');
+        console.error(err);
+        res.status(500).send({ authorized: false, message: 'Unknown error' });
     }
 });
 
