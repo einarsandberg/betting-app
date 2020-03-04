@@ -2,7 +2,7 @@
 "use strict"
 /**
  * Script to populate database with the seasons matches from json file
- * To run: `mongo populate.js`
+ * To run: `mongo populate.ts`
  *  
 */
 import mongoose from 'mongoose';
