@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import './App.css';
 import Login from './Login/Login';
 import AuthService, { User } from '../api/AuthService';
@@ -17,10 +17,8 @@ const App: React.FC = () => {
                 const res = await authService.auth();
                 if (res.authorized) {
                     setCurrentUser(res.user);
-                    setIsAuthorized(true);
-                } else {
-                    setIsAuthorized(false);
                 }
+                setIsAuthorized(res.authorized);
             } catch(err) {
                 setIsAuthorized(false);
             }
@@ -28,7 +26,7 @@ const App: React.FC = () => {
         authUser();
     }, []);
 
-    const login =  async (email: string, password: string): Promise<void> => {
+    const login = async (email: string, password: string): Promise<void> => {
         try  {
             const res = await authService.login(email, password);
             if (res.authorized) {
@@ -42,7 +40,7 @@ const App: React.FC = () => {
             setIsAuthorized(false);
         }
     };
-    
+
     return (
         <div className="App">
             { !isAuthorized ? 
@@ -54,13 +52,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-
-
-// function initTokenRefresh() {
-//     const jwtExpiryDate = Number(localStorage.getItem('jwtExpiryDate')!);
-//     const currentDate = Date.now();
-//     const diff = Math.abs(jwtExpiryDate - currentDate);
-//     setInterval(() => {
-//         authService.refreshTokens()
-//     }, diff);
-// }
