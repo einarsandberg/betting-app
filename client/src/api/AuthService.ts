@@ -2,7 +2,6 @@ import jwt from 'jsonwebtoken';
 
 interface LoginResponse extends AuthStatusResponse {
     token: string;
-    refreshToken: string;
 }
 
 interface AuthStatusResponse {
@@ -36,7 +35,6 @@ export default class AuthService {
         const expiryDate = (jwt.decode(data.token) as { email: string; iat: number; exp: number; }).exp * 1000;
         localStorage.setItem('jwt', data.token);
         localStorage.setItem('jwtExpiryDate', expiryDate.toString());
-        localStorage.setItem('refreshToken', data.refreshToken);
         return data;
     }
 
@@ -53,9 +51,5 @@ export default class AuthService {
         );
         
         return res.json();
-    }
-
-    public refreshToken = async(): Promise<void> => {
-        // const res = await fetch()
     }
 }
