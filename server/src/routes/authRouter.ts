@@ -14,7 +14,8 @@ router.post('/login', async (req, res) => {
         if (!success) {
             return res.status(401).send({authorized: false, message: 'Wrong username/password'});
         }
-        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET!, { expiresIn: 900 });
+
+        const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET!, { expiresIn: '1d' });
 
         return res.json({
             token,
