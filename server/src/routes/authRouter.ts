@@ -1,8 +1,6 @@
 import User from 'src/schemas/User';
 import jwt from 'jsonwebtoken';
-import withAuth from './middleware';
 import { Router } from 'express';
-import { v4 as uuid } from 'uuid';
 
 const router = Router();
 // TODO: nicer responses
