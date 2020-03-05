@@ -4,6 +4,7 @@ import BetGroup from './BetGroup';
 import './Bet.css';
 import BetService, { MatchBet } from '../../api/BetService';
 import { useEffect } from 'react';
+import BetGroupTable from './BetGroupTable';
 
 const betService = new BetService();
 
@@ -28,7 +29,7 @@ const Bet: React.FC<BetProps> = (props: BetProps) => {
             return currentBet;
         });
     };
-
+    
     const submitBet = (): void => {
         betService.placeBet(bet);
     };
@@ -46,19 +47,27 @@ const Bet: React.FC<BetProps> = (props: BetProps) => {
         getBet();
         
     }, []);
-
-    const groupEls = Object.keys(props.groups).map((groupName: string) => {
+    
+    const validBet = bet.filter((matchBet) => matchBet.homeGoals !== undefined && matchBet.awayGoals !== undefined);
+    
+    const elements = Object.keys(props.groups).map((groupName: string) => {
         return ( 
-            <BetGroup 
-                key={'group' + groupName} 
-                currentBet={bet} 
-                matches={props.groups[groupName]} 
-                updateBet={updateBet}
-            /> );
+            <div key={`group${groupName}`}>
+                <BetGroup 
+                    currentBet={bet} 
+                    matches={props.groups[groupName]} 
+                    updateBet={updateBet}
+                />
+                <BetGroupTable
+                    bet={validBet}
+                    matches={props.groups[groupName]}
+                />
+            </div>
+        );
     });
     return (
         <div className="Bet">
-            { groupEls }
+            { elements }
             <div className="Bet__submit" onClick={submitBet}>Save</div>
         </div>
     );

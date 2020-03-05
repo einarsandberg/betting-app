@@ -14,15 +14,20 @@ const BetMatch: React.FC<BetMatchProps> = (props: BetMatchProps) => {
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const bet = {} as MatchBet;
+        let value: number | undefined;
+        if(!isNaN(parseInt(e.target.value))) {
+            value = parseInt(e.target.value);
+        }
+
         if (e.target.name === 'home') {
-            bet.homeGoals = Number(e.target.value);
+            bet.homeGoals = value;
         } else {
-            bet.awayGoals = Number(e.target.value);
+            bet.awayGoals = value;
         }
         bet.matchId = props.matchId;
         props.updateBet(bet);
     };
-
+    
     return (
         <div className="BetMatch">
             <div className="BetMatch__teams">
@@ -34,11 +39,13 @@ const BetMatch: React.FC<BetMatchProps> = (props: BetMatchProps) => {
                     { props.awayTeam }
                 </span>
             </div>
+            
             <input 
                 className="BetMatch__goals-input"
                 type="number"
                 name="home"
-                value={props.currentBet?.homeGoals || ''}
+                min="0"
+                value={props.currentBet?.homeGoals !== undefined ? props.currentBet?.homeGoals : ''}
                 onChange={handleInputChange}
             ></input>
             <span>-</span>
@@ -46,7 +53,8 @@ const BetMatch: React.FC<BetMatchProps> = (props: BetMatchProps) => {
                 className="BetMatch__goals-input"
                 type="number"
                 name="away"
-                value={props.currentBet?.awayGoals || ''}
+                min="0"
+                value={props.currentBet?.awayGoals !== undefined ? props.currentBet?.awayGoals : ''}
                 onChange={handleInputChange}
             ></input>
             

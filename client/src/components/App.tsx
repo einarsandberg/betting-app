@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Login from './Login/Login';
 import AuthService, { User } from '../api/AuthService';
