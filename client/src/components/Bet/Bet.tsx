@@ -52,7 +52,7 @@ const Bet: React.FC<BetProps> = (props: BetProps) => {
     
     const elements = Object.keys(props.groups).map((groupName: string) => {
         return ( 
-            <div key={`group${groupName}`}>
+            <div className="Bet__group-wrapper" key={`group${groupName}`}>
                 <BetGroup 
                     currentBet={bet} 
                     matches={props.groups[groupName]} 

@@ -13,3 +13,8 @@
     color: white;
     cursor: pointer;
 }
+
+.Bet__group-wrapper {
+    max-width: 790px;
+    margin: 0 auto;
+}

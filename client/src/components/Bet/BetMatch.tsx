@@ -39,24 +39,25 @@ const BetMatch: React.FC<BetMatchProps> = (props: BetMatchProps) => {
                     { props.awayTeam }
                 </span>
             </div>
-            
-            <input 
-                className="BetMatch__goals-input"
-                type="number"
-                name="home"
-                min="0"
-                value={props.currentBet?.homeGoals !== undefined ? props.currentBet?.homeGoals : ''}
-                onChange={handleInputChange}
-            ></input>
-            <span>-</span>
-            <input 
-                className="BetMatch__goals-input"
-                type="number"
-                name="away"
-                min="0"
-                value={props.currentBet?.awayGoals !== undefined ? props.currentBet?.awayGoals : ''}
-                onChange={handleInputChange}
-            ></input>
+            <div className="BetMatch__goals">
+                <input 
+                    className="goals__input"
+                    type="number"
+                    name="home"
+                    min="0"
+                    value={props.currentBet?.homeGoals !== undefined ? props.currentBet?.homeGoals : ''}
+                    onChange={handleInputChange}
+                ></input>
+                <span>-</span>
+                <input 
+                    className="goals__input"
+                    type="number"
+                    name="away"
+                    min="0"
+                    value={props.currentBet?.awayGoals !== undefined ? props.currentBet?.awayGoals : ''}
+                    onChange={handleInputChange}
+                ></input>
+            </div>
             
         </div>
     );

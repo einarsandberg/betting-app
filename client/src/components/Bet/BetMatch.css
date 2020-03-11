@@ -1,21 +1,48 @@
 .BetMatch {
     width: 50%;
-    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding-bottom: 12px;
     padding-top: 12px;
+    font-size: 18px;
+    box-sizing: border-box;
     border-bottom: 1px solid lightgrey;
 }
 
 .BetMatch__teams {
-    width: 60%;
     display: inline-block;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
 }
 
-.BetMatch__goals-input  {
+.BetMatch__goals {
+    white-space: nowrap;
+}
+
+.goals__input {
     font-size: 16px;
     width: 32px;
     margin: 0 8px;
+}
+
+.goals__input:nth-child(3) {
+    margin-right: 0;
+}
+
+@media screen and (max-width: 720px) {
+    .BetMatch {
+        width: 100%;
+    }
+  }
+
+@media screen and (min-width: 721px) {
+    .BetMatch:nth-child(even) {
+        padding-left: 12px;
+    }
+
+    .BetMatch:nth-child(odd) {
+        padding-right: 12px;
+    }
 }
