@@ -2,7 +2,7 @@
 "use strict"
 /**
  * Script to populate database with the seasons matches from json file
- * To run: `mongo populate.ts`
+ * To run: `npm run populate`
  *  
 */
 import mongoose from 'mongoose';
@@ -35,6 +35,7 @@ async function addMatchesToDb(matches: IMatch[]) {
        process.exit();
     } catch(err) {
         console.error(err);
+        process.exit();
     }
 }
 
