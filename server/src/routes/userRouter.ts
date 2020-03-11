@@ -4,7 +4,13 @@ import User from 'src/schemas/User';
 const router = Router();
 // Signup
 router.post('/', async (req, res) => {
-    const user = new User({ ...req.body });
+    const userData = {
+        email: req.body.email,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        password: req.body.password,
+    };
+    const user = new User(userData);
     try {
         await user.save();
         res.send('Successfully created user');
