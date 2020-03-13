@@ -1,19 +1,19 @@
 import React, { ChangeEvent } from 'react';
-import { MatchBet} from '../../api/BetService';
+import { IMatchBet} from '../../api/BetService';
 import './BetMatch.css';
 
 type BetMatchProps = {
     matchId: string;
     homeTeam: string;
     awayTeam: string;
-    updateBet: (bet: MatchBet) => void;
-    currentBet?: MatchBet;
+    updateBet: (bet: IMatchBet) => void;
+    currentBet?: IMatchBet;
 };
 
 const BetMatch: React.FC<BetMatchProps> = (props: BetMatchProps) => {
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
-        const bet = {} as MatchBet;
+        const bet = {} as IMatchBet;
         let value: number | undefined;
         if(!isNaN(parseInt(e.target.value))) {
             value = parseInt(e.target.value);

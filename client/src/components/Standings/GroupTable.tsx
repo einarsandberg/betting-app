@@ -1,6 +1,6 @@
 import React from 'react';
 import './GroupTable.css';
-export interface GroupTableTeam {
+export interface IGroupTableTeam {
     name: string;
     played: number;
     points: number;
@@ -13,7 +13,7 @@ export interface GroupTableTeam {
 }
 
 type GroupTableProps = {
-    teams: GroupTableTeam[];
+    teams: IGroupTableTeam[];
 }
 
 const GroupTable: React.FC<GroupTableProps> = (props: GroupTableProps) => {
@@ -55,7 +55,7 @@ const GroupTable: React.FC<GroupTableProps> = (props: GroupTableProps) => {
     );
 };
 
-function compareTeams(a: GroupTableTeam, b: GroupTableTeam): number{
+function compareTeams(a: IGroupTableTeam, b: IGroupTableTeam): number{
     if (a.points > b.points) return -1;
     if (a.points < b.points) return 1;
     

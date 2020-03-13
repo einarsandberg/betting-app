@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './App.css';
 import Login from './Login/Login';
-import AuthService, { User } from '../api/AuthService';
+import AuthService, { IUser } from '../api/AuthService';
 import { useEffect } from 'react';
 import Home from './Home';
 
@@ -10,7 +10,7 @@ const authService = new AuthService();
 const App: React.FC = () => {
 
     const [isAuthorized, setIsAuthorized] = useState();
-    const [currentUser, setCurrentUser] = useState({} as User);
+    const [currentUser, setCurrentUser] = useState({} as IUser);
     useEffect(() => {
         async function authUser(): Promise<void> {
             try {

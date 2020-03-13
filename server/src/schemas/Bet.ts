@@ -1,13 +1,13 @@
 import mongoose, { Schema, Document } from 'mongoose';
 import { MatchBetSchema }  from './MatchBet';
-export interface MatchResult {
+export interface IMatchResult {
     matchId: string;
     homeGoals: number;
     awayGoals: number;
 }
 export interface IBet extends Document {
     userId: string;
-    matches: MatchResult[];
+    matches: IMatchResult[];
 }
 
 export const BetSchema: Schema = new Schema({

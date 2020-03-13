@@ -1,5 +1,5 @@
 
-export interface MatchBet {
+export interface IMatchBet {
     matchId: string;
     homeGoals?: number;
     awayGoals?: number;
@@ -8,7 +8,7 @@ export interface MatchBet {
 export default class BetService {
     private baseUrl = '/api/bets';
 
-    public placeBet = async (bet: MatchBet[]): Promise<string> => {
+    public placeBet = async (bet: IMatchBet[]): Promise<string> => {
         const res = await fetch(
             `${this.baseUrl}`, 
             {
@@ -24,7 +24,7 @@ export default class BetService {
         return data;
     }
 
-    public getBet = async (): Promise<MatchBet[]> => {
+    public getBet = async (): Promise<IMatchBet[]> => {
         const res = await fetch(
             `${this.baseUrl}`, 
             {

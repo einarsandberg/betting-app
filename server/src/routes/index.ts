@@ -4,7 +4,7 @@ import AuthRouter from './authRouter';
 import MatchRouter from './matchRouter';
 import BetRouter from './betRouter';
 import withAuth from './middleware';
-export interface ApiRequest<T> extends Request {
+export interface IApiRequest<T> extends Request {
     body: T;
 }
 

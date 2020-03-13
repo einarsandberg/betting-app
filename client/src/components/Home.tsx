@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { User } from '../api/AuthService';
+import { IUser } from '../api/AuthService';
 import { useEffect } from 'react';
-import MatchService, { Match } from '../api/MatchService';
+import MatchService, { IMatch } from '../api/MatchService';
 import Bet from './Bet/Bet';
 import {
     BrowserRouter as Router,
@@ -12,11 +12,11 @@ import './Home.css';
 const matchService = new MatchService();
 
 type HomeProps = {
-    user: User;
+    user: IUser;
 }
 
 const Home: React.FC<HomeProps> = (props: HomeProps) => {
-    const [matches, setMatches] = useState<Match[]>([]);
+    const [matches, setMatches] = useState<IMatch[]>([]);
 
     useEffect(() => {
         async function getMatches(): Promise<void> {
@@ -30,7 +30,7 @@ const Home: React.FC<HomeProps> = (props: HomeProps) => {
         getMatches();
     }, []);
 
-    const groups = matches.reduce((acc: { [key: string]: Match[]; }, curr: Match) => {
+    const groups = matches.reduce((acc: { [key: string]: IMatch[]; }, curr: IMatch) => {
         acc[curr.group] = acc[curr.group] || [];
         acc[curr.group].push(curr);
         return acc;

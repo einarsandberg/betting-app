@@ -1,5 +1,5 @@
 
-export interface Match {
+export interface IMatch {
     _id: string;
     homeTeam: string;
     awayTeam: string;
@@ -9,7 +9,7 @@ export interface Match {
 export default class MatchService {
     private baseUrl = '/api/matches';
 
-    public getMatches = async (): Promise<Match[]> => {
+    public getMatches = async (): Promise<IMatch[]> => {
         const res = await fetch(
             `${this.baseUrl}`, 
             {
@@ -20,7 +20,7 @@ export default class MatchService {
                 }),
             }
         );
-        const data: Match[] = await res.json();
+        const data: IMatch[] = await res.json();
         return data;
     }
 }

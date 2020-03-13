@@ -1,17 +1,18 @@
 import jwt from 'jsonwebtoken';
 
-interface LoginResponse extends AuthStatusResponse {
+interface ILoginResponse extends IAuthStatusResponse {
     token: string;
 }
 
-interface AuthStatusResponse {
+interface IAuthStatusResponse {
     authorized: boolean;
-    user: User;
+    user: IUser;
 }
-export interface User {
+export interface IUser {
     email: string;
     firstName: string;
     password: string;
+    admin: boolean;
 }
 
 
@@ -19,7 +20,7 @@ export default class AuthService {
 
     private baseUrl = '/api/auth';
 
-    public login = async (email: string, password: string): Promise<LoginResponse> => {
+    public login = async (email: string, password: string): Promise<ILoginResponse> => {
         const res = await fetch(
             `${this.baseUrl}/login`, 
             {
@@ -31,14 +32,14 @@ export default class AuthService {
 
             }
         );
-        const data: LoginResponse = await res.json();
+        const data: ILoginResponse = await res.json();
         const expiryDate = (jwt.decode(data.token) as { email: string; iat: number; exp: number; }).exp * 1000;
         localStorage.setItem('jwt', data.token);
         localStorage.setItem('jwtExpiryDate', expiryDate.toString());
         return data;
     }
 
-    public auth = async(): Promise<AuthStatusResponse> => {
+    public auth = async(): Promise<IAuthStatusResponse> => {
         const res = await fetch(
             `${this.baseUrl}/status`, 
             {

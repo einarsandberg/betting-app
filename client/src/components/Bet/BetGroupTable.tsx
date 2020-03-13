@@ -1,19 +1,19 @@
 import React from 'react';
-import { MatchBet } from '../../api/BetService';
-import { Match } from '../../api/MatchService';
-import GroupTable, { GroupTableTeam } from '../Standings/GroupTable';
+import { IMatchBet } from '../../api/BetService';
+import { IMatch } from '../../api/MatchService';
+import GroupTable, { IGroupTableTeam } from '../Standings/GroupTable';
 
 type BetGroupTableProps = {
-    bet: MatchBet[];
-    matches: Match[];
+    bet: IMatchBet[];
+    matches: IMatch[];
 };
 
 const BetGroupTable: React.FC<BetGroupTableProps> = (props: BetGroupTableProps) => {
     // Assume every team has at least one match at home
     const teams = [...new Set<string>(props.matches.map((match) => match.homeTeam))];
     
-    const tableTeams: GroupTableTeam[] = teams.map((teamName) => {
-        const initialStats: GroupTableTeam = {
+    const tableTeams: IGroupTableTeam[] = teams.map((teamName) => {
+        const initialStats: IGroupTableTeam = {
             name: teamName,
             played: 0,
             points: 0,
@@ -48,7 +48,7 @@ function calcPoints(goalDifference: number): number {
 }
 
 // Add new match stats to table stats
-function calcCurrentStats(prev: GroupTableTeam, matchGoalsFor: number, matchGoalsAgainst: number): GroupTableTeam {
+function calcCurrentStats(prev: IGroupTableTeam, matchGoalsFor: number, matchGoalsAgainst: number): IGroupTableTeam {
     const goalDifference = matchGoalsFor - matchGoalsAgainst;
     const points = calcPoints(goalDifference);
     

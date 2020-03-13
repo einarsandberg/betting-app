@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { Match } from '../../api/MatchService';
+import { IMatch } from '../../api/MatchService';
 import BetGroup from './BetGroup';
 import './Bet.css';
-import BetService, { MatchBet } from '../../api/BetService';
+import BetService, { IMatchBet } from '../../api/BetService';
 import { useEffect } from 'react';
 import BetGroupTable from './BetGroupTable';
 
@@ -10,15 +10,15 @@ const betService = new BetService();
 
 type BetProps = {
     groups: {
-        [key: string]: Match[];
+        [key: string]: IMatch[];
     };
 };
 
 const Bet: React.FC<BetProps> = (props: BetProps) => {
-    const [bet, setBet] = useState<MatchBet[]>([]);
+    const [bet, setBet] = useState<IMatchBet[]>([]);
     
-    const updateBet = (matchBet: MatchBet): void => {
-        setBet((prevBet: MatchBet[]) => {
+    const updateBet = (matchBet: IMatchBet): void => {
+        setBet((prevBet: IMatchBet[]) => {
             const currentBet = [ ...prevBet ];
             const index = currentBet.map(({ matchId }) => matchId).indexOf(matchBet.matchId);
             if (index === -1 ) {
