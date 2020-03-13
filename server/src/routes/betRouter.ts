@@ -1,12 +1,12 @@
 import { Router } from 'express';
-import Bet, { MatchResult } from 'src/schemas/Bet';
-import { ApiRequest } from '.';
+import Bet, { IMatchResult } from 'src/schemas/Bet';
+import { IApiRequest } from '.';
 import User from 'src/schemas/User';
 
 
 const router = Router();
 
-router.put('/', async (req: ApiRequest<MatchResult[]>, res) => {
+router.put('/', async (req: IApiRequest<IMatchResult[]>, res) => {
     try {
         const user = await User.findOne({ email: res.locals.email });
         if (!user) return res.status(500).send('User not found');

@@ -8,7 +8,7 @@ import BetGroupTable from './BetGroupTable';
 
 const betService = new BetService();
 
-type BetProps = {
+interface BetProps {
     groups: {
         [key: string]: IMatch[];
     };

@@ -11,7 +11,7 @@ import {
 import './Home.css';
 const matchService = new MatchService();
 
-type HomeProps = {
+interface HomeProps {
     user: IUser;
 }
 

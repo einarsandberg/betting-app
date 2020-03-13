@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react';
 import { IMatchBet} from '../../api/BetService';
 import './BetMatch.css';
 
-type BetMatchProps = {
+interface BetMatchProps {
     matchId: string;
     homeTeam: string;
     awayTeam: string;

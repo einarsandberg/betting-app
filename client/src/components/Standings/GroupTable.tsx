@@ -12,7 +12,7 @@ export interface IGroupTableTeam {
     losses: number;
 }
 
-type GroupTableProps = {
+interface GroupTableProps {
     teams: IGroupTableTeam[];
 }
 

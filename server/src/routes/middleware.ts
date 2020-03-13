@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express';
 
-type DecodedData = {
+interface DecodedData {
     email: string;
 }
 

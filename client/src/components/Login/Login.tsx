@@ -2,7 +2,7 @@ import React from 'react';
 import './Login.css';
 import { useState } from 'react';
 
-type LoginProps = {
+interface LoginProps {
     login: (userName: string, password: string) => void;
 }
 
