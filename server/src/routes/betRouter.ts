@@ -1,19 +1,17 @@
 import { Router } from 'express';
-import Bet, { MatchBet } from 'src/schemas/Bet';
+import Bet, { MatchResult } from 'src/schemas/Bet';
 import { ApiRequest } from '.';
 import User from 'src/schemas/User';
 
 
 const router = Router();
-// Signup
 
-router.put('/', async (req: ApiRequest<MatchBet[]>, res) => {
+router.put('/', async (req: ApiRequest<MatchResult[]>, res) => {
     try {
         const user = await User.findOne({ email: res.locals.email });
         if (!user) return res.status(500).send('User not found');
-        
         await Bet.findOneAndUpdate({ userId: user._id }, { matches: req.body }, { upsert: true });
-        res.json({ status: 'success' });
+        res.json({ message: 'Success' });
     } catch(err) {
         console.error(err);
         res.status(500).send('An error occured');
@@ -29,7 +27,7 @@ router.get('/', async (req, res) => {
 
         if (!bet) return res.json([]);
 
-        res.json(bet.matches);
+        return res.json(bet.matches);
 
     } catch(err) {
         console.error(err);
