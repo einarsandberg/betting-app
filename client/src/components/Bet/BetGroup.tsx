@@ -3,13 +3,13 @@ import { IMatch } from '../../api/MatchService';
 import BetMatch from './BetMatch';
 import './BetGroup.css';
 import { IMatchBet } from '../../api/BetService';
-interface BetGroupProps {
+interface IBetGroupProps {
     matches: IMatch[];
     currentBet: IMatchBet[];
     updateBet: (bet: IMatchBet) => void;
 }
 
-const BetGroup: React.FC<BetGroupProps> = (props: BetGroupProps) => {
+const BetGroup: React.FC<IBetGroupProps> = (props: IBetGroupProps) => {
     
     const matches = props.matches.map((match) => {
         return (

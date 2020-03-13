@@ -3,12 +3,12 @@ import { IMatchBet } from '../../api/BetService';
 import { IMatch } from '../../api/MatchService';
 import GroupTable, { IGroupTableTeam } from '../Standings/GroupTable';
 
-interface BetGroupTableProps {
+interface IBetGroupTableProps {
     bet: IMatchBet[];
     matches: IMatch[];
 }
 
-const BetGroupTable: React.FC<BetGroupTableProps> = (props: BetGroupTableProps) => {
+const BetGroupTable: React.FC<IBetGroupTableProps> = (props: IBetGroupTableProps) => {
     // Assume every team has at least one match at home
     const teams = [...new Set<string>(props.matches.map((match) => match.homeTeam))];
     

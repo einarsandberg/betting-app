@@ -12,11 +12,11 @@ export interface IGroupTableTeam {
     losses: number;
 }
 
-interface GroupTableProps {
+interface IGroupTableProps {
     teams: IGroupTableTeam[];
 }
 
-const GroupTable: React.FC<GroupTableProps> = (props: GroupTableProps) => {
+const GroupTable: React.FC<IGroupTableProps> = (props: IGroupTableProps) => {
     props.teams.sort(compareTeams);
 
     return (

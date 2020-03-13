@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
 import { Request, Response } from 'express';
 
-interface DecodedData {
+interface IDecodedData {
     email: string;
 }
 
@@ -14,7 +14,7 @@ const withAuth = (req: Request, res: Response, next: () => void): void => {
             if (err) {
                 res.status(401).json({ authorized: false });
             } else {
-                res.locals.email = (decoded as DecodedData).email;
+                res.locals.email = (decoded as IDecodedData).email;
                 next();
             }
         });

@@ -8,13 +8,13 @@ import BetGroupTable from './BetGroupTable';
 
 const betService = new BetService();
 
-interface BetProps {
+interface IBetProps {
     groups: {
         [key: string]: IMatch[];
     };
-};
+}
 
-const Bet: React.FC<BetProps> = (props: BetProps) => {
+const Bet: React.FC<IBetProps> = (props: IBetProps) => {
     const [bet, setBet] = useState<IMatchBet[]>([]);
     
     const updateBet = (matchBet: IMatchBet): void => {

@@ -11,11 +11,11 @@ import {
 import './Home.css';
 const matchService = new MatchService();
 
-interface HomeProps {
+interface IHomeProps {
     user: IUser;
 }
 
-const Home: React.FC<HomeProps> = (props: HomeProps) => {
+const Home: React.FC<IHomeProps> = (props: IHomeProps) => {
     const [matches, setMatches] = useState<IMatch[]>([]);
 
     useEffect(() => {

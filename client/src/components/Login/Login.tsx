@@ -2,11 +2,11 @@ import React from 'react';
 import './Login.css';
 import { useState } from 'react';
 
-interface LoginProps {
+interface ILoginProps {
     login: (userName: string, password: string) => void;
 }
 
-const Login: React.FC<LoginProps> = (props: LoginProps) => {
+const Login: React.FC<ILoginProps> = (props: ILoginProps) => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

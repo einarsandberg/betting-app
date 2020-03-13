@@ -2,15 +2,15 @@ import React, { ChangeEvent } from 'react';
 import { IMatchBet} from '../../api/BetService';
 import './BetMatch.css';
 
-interface BetMatchProps {
+interface IBetMatchProps {
     matchId: string;
     homeTeam: string;
     awayTeam: string;
     updateBet: (bet: IMatchBet) => void;
     currentBet?: IMatchBet;
-};
+}
 
-const BetMatch: React.FC<BetMatchProps> = (props: BetMatchProps) => {
+const BetMatch: React.FC<IBetMatchProps> = (props: IBetMatchProps) => {
 
     const handleInputChange = (e: ChangeEvent<HTMLInputElement>): void => {
         const bet = {} as IMatchBet;
