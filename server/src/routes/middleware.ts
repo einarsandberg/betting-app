@@ -5,7 +5,7 @@ interface IDecodedData {
     email: string;
 }
 
-const withAuth = (req: Request, res: Response, next: () => void): void => {
+export const auth = (req: Request, res: Response, next: () => void): void => {
     const token = req.headers.authorization?.split(' ')[1];
     if (!token) {
         res.status(401).json({authorized: false});
@@ -20,5 +20,3 @@ const withAuth = (req: Request, res: Response, next: () => void): void => {
         });
     }
 };
-
-export default withAuth;

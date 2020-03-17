@@ -2,7 +2,8 @@ import { Router } from 'express';
 import Match from 'src/schemas/Match';
 import { IApiRequest } from '.';
 import { IMatchResult } from 'src/schemas/Bet';
-import withAuth from './middleware';
+import { auth } from './middleware';
+
 
 const router = Router();
 // Signup
@@ -15,7 +16,7 @@ router.get('/', async (req, res) => {
     } 
 });
 
-router.patch('/', withAuth, async (req: IApiRequest<IMatchResult[]>, res) => {
+router.patch('/', auth, async (req: IApiRequest<IMatchResult[]>, res) => {
     const results  = req.body;
     if (results.length === 0) {
         return res.status(400).json({ message: 'No matches provided' });
