@@ -43,9 +43,10 @@ const App: React.FC = () => {
 
     return (
         <div className="App">
-            { !isAuthorized ? 
-                <Login login={login} />
-                : <Home user={currentUser} />
+            { 
+                isAuthorized  === undefined ? null
+                    :  ( !isAuthorized ? <Login login={login} />
+                        : <Home user={currentUser} /> )
             }
         </div>
     );
