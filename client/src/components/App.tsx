@@ -9,7 +9,7 @@ const authService = new AuthService();
 
 const App: React.FC = () => {
 
-    const [isAuthorized, setIsAuthorized] = useState();
+    const [isAuthorized, setIsAuthorized] = useState<boolean>();
     const [currentUser, setCurrentUser] = useState({} as IUser);
     useEffect(() => {
         async function authUser(): Promise<void> {
