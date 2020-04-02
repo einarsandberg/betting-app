@@ -20,3 +20,6 @@ Betting app
 # Populate db with matches
 `npm run populate`
 
+# Create admin user
+`npm run create-admin {email} {firstName} {lastName} {password} {isAdmin}`
+Ex: `npm run create-admin email@email.com Jane Doe mysecretpassword true`
