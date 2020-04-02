@@ -10,7 +10,6 @@ Betting app
 
 ## Start
 `brew services start mongodb-community@4.2`
-To stop: brew services stop mongodb-community@4.2
 
 # Run server
 `npm run start:dev`
